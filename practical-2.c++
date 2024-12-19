@@ -10,8 +10,10 @@ int main(){
 
   cout<<"Input symbols :";
   vector<char> input_Symbols(nis);
+  unordered_map<char,int> mp;
   for(int i=0;i<nis;i++){
     cin>>input_Symbols[i];
+    mp[input_Symbols[i]]=i;
   }
   cout<<endl;
 
@@ -52,12 +54,8 @@ int main(){
   cin>>input;
 
   int current_state=initial_state;
-  for(int i=0;i<input.size();i++){
-    for(int j=0;j<nis;j++){
-      if(input[i]==input_Symbols[j]){
-        current_state=table[current_state-1][j];
-      }
-    }
+  for(int i=0;i<input.length();i++){
+      current_state=table[current_state-1][mp[input[i]]];
   }
 
   for(int i=0;i<nas;i++){
